@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254072743921",
+    "project_id": "law-bot-3aaac",
+    "storage_bucket": "law-bot-3aaac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254072743921:android:04f7e5013f791841468650",
+        "android_client_info": {
+          "package_name": "com.ahmttyydn.law_bot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254072743921-4ad3oap8ineba8b1aglduir3u3mq6uhq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOv1WvTYa0HT8aRmUTgVz1yZ7lAnGLKKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254072743921-4ad3oap8ineba8b1aglduir3u3mq6uhq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
