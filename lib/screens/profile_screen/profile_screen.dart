@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:law_bot/auth/auth.dart';
+import 'package:law_bot/screens/profile_screen/widgets/about.dart';
+import 'package:law_bot/screens/profile_screen/widgets/contact_us.dart';
 import 'package:law_bot/theme/theme.dart';
 import 'package:law_bot/utils/listener_widget.dart';
 
@@ -76,17 +78,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               SizedBox(
                 width: size.width,
-                height: 260,
+                height: 270,
                 child: Stack(
                   children: [
                     Positioned(
                       top: 0,
+                      left: 50,
                       child: Container(
-                        width: size.width,
-                        height: 120,
+                        width: size.width - 100,
+                        height: 80,
                         decoration: BoxDecoration(
-                            color: ThemeManagement
-                                .instance.currentTheme.primaryColorLight,
+                            color:
+                                ThemeManagement.instance.currentTheme.cardColor,
                             borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0),
@@ -94,8 +97,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Positioned(
-                        top: 55,
-                        right: 175,
+                        top: 45,
+                        right: 165,
                         child: Text(
                           "Profile",
                           style: TextStyle(
@@ -104,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 20),
                         )),
                     Positioned(
-                        top: 90,
+                        top: 100,
                         left: 135,
                         child: GestureDetector(
                           onTap: () {
@@ -130,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         )),
                     Positioned(
-                        top: 185,
+                        top: 195,
                         right: 125,
                         child: Stack(children: [
                           Container(
@@ -157,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ])),
                     Positioned(
-                      top: 230,
+                      top: 240,
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Text(
@@ -177,6 +180,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      const AboutApp(),
+                      const ContactUs(),
                       GestureDetector(
                         onTap: () async {
                           await BotAuth.instance.logOut();
