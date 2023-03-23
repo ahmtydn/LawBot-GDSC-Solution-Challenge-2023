@@ -8,22 +8,24 @@ class BotAuth with ChangeNotifier {
     return _instance!;
   }
 
-  dynamic _user;
+  late User _user;
   bool signed = false;
 
-  dynamic get user {
+  User get user {
     return _user;
   }
 
   BotAuth() {
     FirebaseAuth.instance.authStateChanges().listen((event) async {
       signed = event != null;
-      _user = event;
+      if( event != null) {
+        _user = event;
+      }
       notifyListeners();
     });
   }
 
   Future<void> logOut() async {
-   return FirebaseAuth.instance.signOut();
+    return FirebaseAuth.instance.signOut();
   }
 }
