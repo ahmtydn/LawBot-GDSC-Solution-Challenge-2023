@@ -70,8 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ThemeManagement.instance.currentTheme.primaryColorLight,
             switchAuthTextColor:
                 ThemeManagement.instance.currentTheme.hintColor,
-            buttonStyle: TextStyle(
-                color: ThemeManagement.instance.currentTheme.primaryColor),
+            buttonStyle:const TextStyle(color: Colors.black),
             pageColorDark:
                 ThemeManagement.instance.currentTheme.scaffoldBackgroundColor,
             primaryColorAsInputLabel: false,

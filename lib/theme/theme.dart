@@ -31,7 +31,7 @@ class ThemeManagement extends ChangeNotifier {
   ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: const Color(0xffffffff),
-    primaryColorLight: const Color(0xFF5450D4),
+    primaryColorLight: const Color(0xff64ffda),
     primaryColorDark: const Color(0xff000000),
     canvasColor: const Color(0xFF5DA4F6),
     scaffoldBackgroundColor: const Color(0xff303030),
@@ -288,7 +288,7 @@ class ThemeManagement extends ChangeNotifier {
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: Color(0xFFE80909),
+            color: Color(0xff64ffda),
           )),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),

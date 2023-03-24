@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -97,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Positioned(
-                        top: 45,
+                        top: 28,
                         right: 165,
                         child: Text(
                           "Profile",
@@ -154,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       .instance.currentTheme.primaryColorLight,
                                   shape: BoxShape.circle),
                               child: const Center(
-                                child: Icon(Icons.check, color: Colors.white),
+                                child: Icon(Icons.check, color: Colors.black),
                               ),
                             ),
                           ),

@@ -7,6 +7,7 @@ import 'package:law_bot/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:law_bot/utils/listener_widget.dart';
 import 'firebase_options.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +15,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   BotAuth.instance;
-
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   runApp(const MyApp());
 }
 
