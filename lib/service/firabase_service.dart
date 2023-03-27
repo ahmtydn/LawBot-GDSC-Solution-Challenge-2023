@@ -24,15 +24,40 @@ class FirebaseService extends ChangeNotifier {
 
   Stream<List<CaseModel>> streamCases() {
     return _firestore.collection('cases').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => CaseModel.fromJson(doc.data())).toList();
+      return snapshot.docs
+          .map((doc) => CaseModel.fromJson(doc.data()))
+          .toList();
     });
   }
 
-  Future<CaseModel> addCase(CaseModel newCase) async {
+  Future<String> addCase(CaseModel newCase) async {
     final docRef = await _firestore.collection('cases').add(newCase.toJson());
     final addedDoc = await docRef.get();
-    final addedCase = CaseModel.fromJson(addedDoc.data() as Map<String, dynamic>);
-    return addedCase;
+
+    return addedDoc.id;
+  }
+
+  Future<double> getRating(String id) async {
+    final data =
+        await FirebaseFirestore.instance.collection('cases').doc(id).get();
+    return data.data()?['rating'] ?? 0.0;
+  }
+
+  Future<void> updateRating(double rating, String id) async {
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('cases').doc(id).get();
+
+    if (snapshot.exists) {
+      FirebaseFirestore.instance
+          .collection('cases')
+          .doc(id)
+          .set({"rating": rating}, SetOptions(merge: true));
+    } else {
+      FirebaseFirestore.instance
+          .collection('cases')
+          .doc(id)
+          .set({"rating": rating});
+    }
   }
 
   Future<void> updateCase(String id, CaseModel updatedCase) async {

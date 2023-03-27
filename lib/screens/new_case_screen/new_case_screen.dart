@@ -55,6 +55,28 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     "Based on the nature of the crime and the absence of any previous convictions for intentional crimes, it was decided to suspend the announcement of the verdict in accordance with Article 231 of Law no. 5271, and the defendant was placed on probation for a period of two years in accordance with Article 231-5 of the same law."
   ];
 
+  List<String> similarDecision1 = [
+    "John Doe, as a driver, has caused a car accident resulting in the death of a pedestrian. The court determined that the defendant committed the crime of manslaughter. The defendant was sentenced to 4 years in prison under Article 84/1 of the Criminal Code.",
+    "Given the defendant's defense, other evidence in the case, and witness testimony, the court determined that the defendant was driving under the influence of alcohol at the time of the accident. The defendant did not admit guilt or express remorse. Therefore, his sentence was aggravated.",
+    "The defendant's sentence will be executed under Article 105/1 of the Law on the Execution of Penalties and Security Measures. The defendant will remain in custody until the judgment is final or until he exercises his right to appeal.",
+    "The defendant will be required to pay all court costs.",
+    "Based on the nature of the crime and the presence of previous convictions for traffic offenses, it was decided not to suspend the announcement of the verdict. Therefore, the defendant will serve his sentence in full."
+  ];
+  List<String> similarDecision2 = [
+    "John Smith has been found guilty of embezzlement. The court has determined that the defendant intentionally took money from his employer without authorization. He was sentenced to five years in prison under Section 61-3-701 of the Montana Code Annotated.",
+    "The defendant showed no remorse and did not admit guilt. Based on the nature of the crime and the defendant's previous criminal history, his sentence was not suspended.",
+    'The defendant will be required to pay restitution to his former employer in the amount of 100,000 dollar',
+    "The court also ordered the defendant to participate in a rehabilitation program for financial crimes while in prison.",
+    "The defendant has the right to appeal this decision within 30 days of the judgment becoming final."
+  ];
+  List<String> similarDecision3 = [
+    "Samantha Johnson has been found guilty of grand larceny. The court determined that the defendant stole jewelry valued at 10,000 dollar from a local store. She was sentenced to three years in prison under Section 155.42 of the New York Penal Law.",
+    "The defendant did not admit guilt or express remorse for her actions. Based on the nature of the crime, her sentence was not suspended.",
+    "The defendant will be required to pay restitution to the store in the amount of 10,000 dollar",
+    "The court also ordered the defendant to participate in a rehabilitation program for theft while in prison.",
+    "The defendant has the right to appeal this decision within 30 days of the judgment becoming final."
+  ];
+
   Map<String, dynamic> isValid(int currentStep) {
     return {"status": true, "message": "Bir Hata Oluştu!"};
   }
@@ -233,10 +255,14 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                     onStepTapped: (step) {
                       setState(() => _currentStep = step);
                     },
-                    onStepContinue: () {
+                    onStepContinue: () async {
                       final isLastStep = _currentStep == _getSteps().length - 1;
+                      String docId;
                       if (isLastStep) {
                         CaseModel data = CaseModel(
+                            similarDecision1: similarDecision1,
+                            similarDecision2: similarDecision2,
+                            similarDecision3: similarDecision3,
                             caseNumber: caseNumber.text,
                             plaintiff: plaintiff.text,
                             participating: participating.text,
@@ -250,25 +276,26 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                             caseAndVerdict: caseAndVerdict,
                             theVerdictStatesThat: theVerdictStatesThat);
                         try {
-                          FirebaseService.instance.addCase(data);
+                          docId = await FirebaseService.instance.addCase(data);
+                          _complatedProccess.value = false;
+                          // ignore: use_build_context_synchronously
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) => LoadingDialog(
+                                  isCompleted: _complatedProccess));
+                          Future.delayed(const Duration(seconds: 5))
+                              .then((value) => _complatedProccess.value = true)
+                              .then((value) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ResultScreen(
+                                            docId: docId,
+                                            caseModel: data,
+                                          ))));
                         } catch (e) {
                           print(e);
                         }
-
-                        _complatedProccess.value = false;
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (BuildContext context) =>
-                                LoadingDialog(isCompleted: _complatedProccess));
-                        Future.delayed(const Duration(seconds: 5))
-                            .then((value) => _complatedProccess.value = true)
-                            .then((value) => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ResultScreen(
-                                          caseModel: data,
-                                        ))));
                       } else {
                         if (isValid(_currentStep)['status']) {
                           setState(() => _currentStep += 1);
