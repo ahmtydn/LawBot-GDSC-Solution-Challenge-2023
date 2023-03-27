@@ -1,29 +1,32 @@
 class CaseModel {
-  CaseModel({
-    required this.caseNumber,
-    required this.plaintiff,
-    required this.participating,
-    required this.defendant,
-    required this.crime,
-    required this.consideredDue,
-    required this.defendantSDefense,
-    required this.statementOfTheComplainant,
-    required this.testimonyOfTheWitness,
-    required this.similarDecision1,
-    required this.similarDecision2,
-    required this.similarDecision3,
-    required this.caseAndVerdict,
-    required this.theVerdictStatesThat,
-  });
+  CaseModel(
+      {required this.caseNumber,
+      required this.plaintiff,
+      required this.participating,
+      required this.defendant,
+      required this.crime,
+      required this.occurrenceAndAcceptance,
+      required this.defendantSDefense,
+      required this.statementOfTheComplainant,
+      required this.testimonyOfTheWitness,
+      required this.similarDecision1,
+      required this.similarDecision2,
+      required this.similarDecision3,
+      required this.caseAndVerdict,
+      required this.theVerdictStatesThat,
+      this.rating,
+      this.id});
 
+  String? id;
   String caseNumber;
   String plaintiff;
   String participating;
   String defendant;
   String crime;
-  String consideredDue;
+  String occurrenceAndAcceptance;
   String defendantSDefense;
   String statementOfTheComplainant;
+  double? rating;
   String testimonyOfTheWitness;
   List<String> caseAndVerdict;
   List<String> similarDecision1;
@@ -31,16 +34,19 @@ class CaseModel {
   List<String> similarDecision3;
   List<String> theVerdictStatesThat;
 
-  factory CaseModel.fromJson(Map<String, dynamic> json) => CaseModel(
+  factory CaseModel.fromJson(Map<String, dynamic> json, String docId) =>
+      CaseModel(
         caseNumber: json["case_number"],
         plaintiff: json["plaintiff"],
         participating: json["participating"],
         defendant: json["defendant"],
         crime: json["crime"],
-        consideredDue: json["considered_due"],
+        rating: json['rating'],
+        occurrenceAndAcceptance: json["occurrence_and_acceptance"],
         defendantSDefense: json["defendant's_defense"],
         statementOfTheComplainant: json["statement_of_the_complainant"],
         testimonyOfTheWitness: json["testimony_of_the_witness"],
+        id: docId,
         caseAndVerdict:
             List<String>.from(json["case_and_verdict"].map((x) => x)),
         similarDecision1:
@@ -59,7 +65,8 @@ class CaseModel {
         "participating": participating,
         "defendant": defendant,
         "crime": crime,
-        "considered_due": consideredDue,
+        'rating': rating,
+        "occurrence_and_acceptance": occurrenceAndAcceptance,
         "defendant's_defense": defendantSDefense,
         "statement_of_the_complainant": statementOfTheComplainant,
         "testimony_of_the_witness": testimonyOfTheWitness,

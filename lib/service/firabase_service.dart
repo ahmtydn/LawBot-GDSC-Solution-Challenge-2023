@@ -15,17 +15,10 @@ class FirebaseService extends ChangeNotifier {
     _firestore = FirebaseFirestore.instance;
   }
 
-  Future<List<CaseModel>> getCases() async {
-    final snapshot = await _firestore.collection('cases').get();
-    final cases =
-        snapshot.docs.map((doc) => CaseModel.fromJson(doc.data())).toList();
-    return cases;
-  }
-
   Stream<List<CaseModel>> streamCases() {
     return _firestore.collection('cases').snapshots().map((snapshot) {
       return snapshot.docs
-          .map((doc) => CaseModel.fromJson(doc.data()))
+          .map((doc) => CaseModel.fromJson(doc.data(), doc.id))
           .toList();
     });
   }
@@ -40,6 +33,7 @@ class FirebaseService extends ChangeNotifier {
   Future<double> getRating(String id) async {
     final data =
         await FirebaseFirestore.instance.collection('cases').doc(id).get();
+    print(data.data()?['rating']);
     return data.data()?['rating'] ?? 0.0;
   }
 

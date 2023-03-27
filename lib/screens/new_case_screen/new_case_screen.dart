@@ -28,7 +28,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       TextEditingController(text: "Ebru Şahin");
   final TextEditingController crime = TextEditingController(text: "Fraud");
 
-  final TextEditingController consideredDue = TextEditingController(
+  final TextEditingController occurrenceAndAcceptance = TextEditingController(
       text:
           "Ebru Şahin, as the owner of a company, has committed fraud by giving false information to her clients and not delivering the promised goods. The public prosecutor's office has filed a lawsuit against the defendant for fraud.");
   final TextEditingController defendantsDefense = TextEditingController(
@@ -138,7 +138,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
             state: _currentStep > 5 ? StepState.complete : StepState.indexed,
             isActive: _currentStep >= 5,
             title: Text(
-              "Considered Due",
+              "Occurrence and Acceptance",
               style: theme.textTheme.titleLarge,
             ),
             content: ConstrainedBox(
@@ -146,7 +146,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               child: TextFormField(
                 expands: true,
                 maxLines: null,
-                controller: consideredDue,
+                controller: occurrenceAndAcceptance,
               ),
             )),
         Step(
@@ -268,7 +268,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                             participating: participating.text,
                             defendant: defendant.text,
                             crime: crime.text,
-                            consideredDue: consideredDue.text,
+                            occurrenceAndAcceptance: occurrenceAndAcceptance.text,
                             defendantSDefense: defendantsDefense.text,
                             statementOfTheComplainant:
                                 statementOfTheComplainant.text,
