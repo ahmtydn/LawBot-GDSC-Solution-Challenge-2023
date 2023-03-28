@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:law_bot/auth/auth.dart';
 import 'package:law_bot/screens/init_screen/init_screen.dart';
 import 'package:law_bot/screens/login/login_screen.dart';
+import 'package:law_bot/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:law_bot/screens/splash/splash.dart';
 import 'package:law_bot/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             if (settings.name == "/home") {
               return const InitScreen();
             }
-            return const SplashScreen();
+            return const OnBoardingScreen();
           },
         );
 

@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: FirebaseService.instance.streamCases(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return Center(child: const CircularProgressIndicator());
             }
             if (snapshot.hasData &&
                 snapshot.data != null &&
