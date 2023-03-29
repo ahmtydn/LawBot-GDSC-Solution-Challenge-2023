@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img src="https://img.freepik.com/free-vector/artificial-intelligence-regulations-abstract-concept-vector-illustration-artificial-intelligence-law-ai-development-limitation-global-tech-regulations-robotics-legislation-abstract-metaphor_335657-6132.jpg?w=740&t=st=1680092758~exp=1680093358~hmac=41e44d7a6ae3bf89d62c0b6378d8af219868d4d7c8bfcf61c9b2334402815e3c"  width="200" height="200">
+    <img src="https://imgyukle.com/f/2023/03/29/QvqxzY.png"  width="300" height="300">
   </a>
 </p>
 
