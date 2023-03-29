@@ -32,3 +32,5 @@ This command downloads all dependencies specified in your application's `pubspec
     <img src="https://www.todaysgeneralcounsel.com/wp-content/uploads/2022/12/robot-AI-opinion-thinkng-legal-iStock-1350320510-e1672442734661.jpg" width="400" height="300">
   </a>
 </p>
+
+LawBot provides a universal solution that can accurately predict various crimes by learning the laws of different countries. Used as an assistant and decision support systems in the field of law, LawBot helps lawyers and judges develop new strategies and minimizes the error rate.
