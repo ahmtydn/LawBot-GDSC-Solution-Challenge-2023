@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:law_bot/screens/home/home_screen.dart';
-
+import 'package:law_bot/auth/auth.dart';
+import 'package:law_bot/screens/init_screen/init_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/dot_indicator.dart';
 import '../../widgets/onboarding_widget.dart';
 
@@ -15,6 +16,11 @@ class _OnboardingPageState extends State<OnBoardingScreen> {
   late PageController _pageController;
 
   int _pageIndex = 0;
+  Future<void> setOnboard() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    preferences.setBool("onboard", true);
+  }
 
   @override
   void initState() {
@@ -40,7 +46,7 @@ class _OnboardingPageState extends State<OnBoardingScreen> {
             children: [
               Expanded(
                 child: PageView.builder(
-                  itemCount: demo_data.length,
+                  itemCount: onboardingData.length,
                   controller: _pageController,
                   onPageChanged: (index) {
                     setState(() {
@@ -48,16 +54,16 @@ class _OnboardingPageState extends State<OnBoardingScreen> {
                     });
                   },
                   itemBuilder: (context, index) => OnboardContent(
-                    image: demo_data[index].image,
-                    title: demo_data[index].title,
-                    description: demo_data[index].description,
+                    image: onboardingData[index].image,
+                    title: onboardingData[index].title,
+                    description: onboardingData[index].description,
                   ),
                 ),
               ),
               Row(
                 children: [
                   ...List.generate(
-                      demo_data.length,
+                      onboardingData.length,
                       (index) => Padding(
                             padding: EdgeInsets.all(
                                 mediaQueryData.size.height * 0.01),
@@ -68,18 +74,17 @@ class _OnboardingPageState extends State<OnBoardingScreen> {
                       height: mediaQueryData.size.height * 0.08,
                       width: mediaQueryData.size.width * 0.17,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
-                          );
+                        onPressed: () async {
+                          await setOnboard();
+                          await BotService.instance.checkOnboard();
+                          // ignore: use_build_context_synchronously
+                          Navigator.popAndPushNamed(context, "/");
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFFFC221),
+                            backgroundColor: const Color(0xFFFFC221),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        child: Text('Skip'),
+                        child: const Text('Skip'),
                       )),
                 ],
               ),
@@ -100,23 +105,23 @@ class Onboard {
   });
 }
 
-final List<Onboard> demo_data = [
+final List<Onboard> onboardingData = [
   Onboard(
     image: 'assets/onboard.gif',
-    title: 'Merhaba, ben LawBot!',
+    title: 'Hello, I am LawBot!',
     description:
-        'Adalet sistemi için yeni bir çığır açıyorum. Benimle suçlulara karşı savaşabilir ve insanların daha adil kararlar almasına yardımcı olabilirim.',
+        'I am revolutionizing the justice system. I can help fight against criminals and assist people in making fair decisions.',
   ),
   Onboard(
     image: 'assets/onboard2.gif',
-    title: 'LawBot nasıl çalışır?',
+    title: 'How does LawBot work?',
     description:
-        'LawBot, makine öğrenmesi ve doğal dil işleme teknolojilerini kullanarak karar verme sürecinde yardımcı olur. Sanık ve tanık ifadeleri gibi pek çok parametreyi göz önünde bulundurarak, avukat ve hakimlere tahmin edilen sonucu sunar. Bu sayede karar verme sürecini hızlandırır ve vakit kaybını azaltır.',
+        'LawBot uses machine learning and natural language processing technologies to assist in the decision-making process. By considering various parameters such as defendant and witness statements, I provide lawyers and judges with predicted outcomes, speeding up the decision-making process and reducing time wastage.',
   ),
   Onboard(
     image: 'assets/onboard3.gif',
-    title: 'LawBot ile evrensel çözümler!',
+    title: 'Universal solutions with LawBot!',
     description:
-        'LawBot, farklı ülkelerin kanunlarını öğrenerek çeşitli suçlara doğru tahminlemelerde bulunabilen evrensel bir çözüm sunuyor. Hukuk alanında yardımcı ve karar destek sistemleri şeklinde kullanılan LawBot, avukat ve hakimlere yeni stratejiler geliştirmelerine yardımcı olur ve hata oranını en aza indirir.',
+        'LawBot offers a universal solution by learning the laws of different countries and making accurate predictions for various crimes. As a legal assistant and decision support system, LawBot helps lawyers and judges develop new strategies and minimizes the margin of error.',
   ),
 ];

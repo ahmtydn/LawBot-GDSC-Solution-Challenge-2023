@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:law_bot/theme/theme.dart';
 
 class OnboardContent extends StatelessWidget {
   const OnboardContent({
@@ -16,21 +17,28 @@ class OnboardContent extends StatelessWidget {
       //mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
-        Image.asset(image, height: 250),
+        Image.asset(image, height: 350),
         const Spacer(),
         Text(
           title,
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(fontWeight: FontWeight.w500),
+          style: TextStyle(
+              color:
+                  ThemeManagement.instance.currentTheme.scaffoldBackgroundColor,
+              fontSize: 22,
+              fontWeight: FontWeight.w500),
         ),
-        const Spacer(),
+        const SizedBox(height: 15),
         Text(
           description,
+          style: TextStyle(
+              color:
+                  ThemeManagement.instance.currentTheme.scaffoldBackgroundColor,
+              fontSize: 20,
+              fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
-        )
+        ),
+        const Spacer(),
       ],
     );
   }

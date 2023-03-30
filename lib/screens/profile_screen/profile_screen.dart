@@ -49,8 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           content: Text("Profile Picture uploaded successfully"),
         ),
       );
-      BotAuth.instance.user.updatePhotoURL(urlDownload);
-      BotAuth.instance.notifyListeners();
+      BotService.instance.user.updatePhotoURL(urlDownload);
+      BotService.instance.notifyListeners();
     } else {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ListenerWidget(
-      notifier: BotAuth.instance,
+      notifier: BotService.instance,
       builder: (context, _) {
         return Scaffold(
           backgroundColor:
@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fit: BoxFit.fill,
                                 placeholder:
                                     const AssetImage('assets/loading.gif'),
-                                image: NetworkImage(BotAuth
+                                image: NetworkImage(BotService
                                         .instance.user.photoURL ??
                                     "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"),
                               ),
@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Text(
-                          "${BotAuth.instance.user.email}",
+                          "${BotService.instance.user.email}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: ThemeManagement
@@ -183,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const ContactUs(),
                       GestureDetector(
                         onTap: () async {
-                          await BotAuth.instance.logOut();
+                          await BotService.instance.logOut();
                           // ignore: use_build_context_synchronously
                           Navigator.popAndPushNamed(context, "/");
                         },

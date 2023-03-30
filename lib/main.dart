@@ -7,7 +7,7 @@ import 'package:law_bot/screens/splash/splash.dart';
 import 'package:law_bot/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:law_bot/utils/listener_widget.dart';
-import 'firebase_options.dart';
+import 'utils/firebase_options.dart';
 import 'package:flutter/services.dart';
 
 Future<void> main() async {
@@ -15,7 +15,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  BotAuth.instance;
+  BotService.instance;
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   runApp(const MyApp());
 }
@@ -32,15 +32,19 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       onGenerateRoute: (settings) {
         Widget page = ListenerWidget(
-          notifier: BotAuth.instance,
-          builder: (ctx, BotAuth userValue) {
+          notifier: BotService.instance,
+          builder: (ctx, BotService userValue) {
+            if (!userValue.onboard) {
+              return const OnBoardingScreen();
+            }
             if (!userValue.signed) {
               return const LoginScreen();
             }
+
             if (settings.name == "/home") {
               return const InitScreen();
             }
-            return const OnBoardingScreen();
+            return const SplashScreen();
           },
         );
 
