@@ -5,14 +5,6 @@
   </a>
 </p>
 
-
-## About Flutter LawBot Mobile App
-<p align="center">
-  <a>
-    <img src="https://img.freepik.com/free-photo/3d-render-smartphone-with-hand-fill-online-survey_107791-15837.jpg?w=740&t=st=1680092326~exp=1680092926~hmac=ca2b152a17c42125730cfd8b8bd720b7d8c99135cc06a1dfd81dad8de02430e5" width="300" height="300">
-  </a>
-</p>
-
 ## Getting Started
 #### Step 1: Installing Flutter
 Before running Flutter, you must have the Flutter SDK installed on your computer. If you don't have Flutter installed yet, you can download and install Flutter from [here](https://docs.flutter.dev/get-started/install).
