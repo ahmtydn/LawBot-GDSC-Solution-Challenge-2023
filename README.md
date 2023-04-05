@@ -7,8 +7,6 @@
 
 
 ## About Flutter LawBot Mobile App
-
-We developed Flutter To Do Mobile Application (App) leading technology FLUTTER & It is a very useful application for today's fast world. The app is created for the users who want to schedule their day to day routine, timings, events, & many more with giving priorities to the tasks. This app will definitely make your schedule perfect up to the mark & you will never miss an event.
 <p align="center">
   <a>
     <img src="https://img.freepik.com/free-photo/3d-render-smartphone-with-hand-fill-online-survey_107791-15837.jpg?w=740&t=st=1680092326~exp=1680092926~hmac=ca2b152a17c42125730cfd8b8bd720b7d8c99135cc06a1dfd81dad8de02430e5" width="300" height="300">
